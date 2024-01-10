@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jang.mtg.mapper.MtRoomMapper">
+
+	<select id="getMtRoomList" resultType="MtRoomVO">
+		Select * from meetingRoom order by mrNo desc
+	</select>
+	
+	<select id="getMtRoom" resultType="MtRoomVO">
+		Select * from meetingRoom where mrNo=#{mrNO}
+	</select>
+	
+	<insert id="insertMtRoom" parameterType="MtRoomVO">
+		Insert into meetingRoom (mr_Name, start_Time, end_Time, capacity, location, building, roomNo, picture, first_Reg_ID)
+		Values (#{mr_Name}, #{start_Time}, #{end_Time}, #{capacity}, #{location}, #{building}, #{roomNo}, #{picture, jdbcType=VARCHAR}, #{first_Reg_ID, jdbcType=VARCHAR})
+	</insert>
+	
+	<update id="updateMtRoom" parameterType="MtRoomVO">
+		Update meetingRoom
+			Set mr_name=#{mr_Name}, start_Time=#{start_Time}, end_Time=#{end_Time}, capacity=#{capacity},
+				location=#{location}, building=#{building}, roomNo=#{roomNo}, picture=#{picture}
+		Where mrNo=#{mrNO}
+	</update>
+	
+	<delete id="deleteMtRoom" parameterType="int">
+		Delete from meetingRoom
+		Where mrNo=#{mrNo}
+	</delete>
+	
+	<select id="getMrReserveList" parameterType="MrResTimeVO" resultType="MrReserveVO">
+		Select * from mr_Reservation where mrNo=#{mrNo} and reserve_Day=#{reserve_Day}
+	</select>
+	
+	<select id="getMrReserve" resultType="MrReserveVO">
+		Select * from mr_Reservation where reNo=#{reNo}
+	</select>
+	
+	<insert id="insertMrReserve" parameterType="MrReserveVO">
+		Insert into mr_Reservation (mrNo, bookerID, title, reserve_Day, reserve_Start, reserve_End, attendees, contents, first_Reg_ID)
+		Values (#{mrNo}, #{bookerID}, #{title}, #{reserve_Day}, #{reserve_Start}, #{reserve_End}, #{attendees}, #{contents}, #{first_Reg_ID})
+	</insert>
+	
+	<update id="updateMrReserve" parameterType="MrReserveVo">
+		Update mr_Reservation
+			Set mrNo=#{mrNo}, bookerID=#{bookerID}, title=#{title}, reserve_Day=#{reserve_Day}, reserve_Start=#{reserve_Start}, reserve_End=#{reserve_End},
+				attendees=#{attendees}, contents=#{contents}, first_Reg_ID=#{first_Reg_ID}
+		Where reNo=#{reNo}
+	</update>
+	
+	<delete id="deleteMrReserve" parameterType="MrReserveVO">
+		Delete from mr_Reservation
+		Where reNo=#{reNO}
+	</delete>
+	
+	<select id="restDupCheck" parameterType="MrReserveVO" resultType="int">
+		Select count(*) from mr_Reservation
+		Where reserve_Day = #{reserve_Day}
+		And mrNo = #{mrNO}
+		And (TO_NUMBER(reserve_Start) BETWEEN TO_NUMBER(#{reserve_Start})+1 and TO_NUMBER(#{reserve_End})-1
+			or TO_NUMBER(reserve_End) BETWEEN TO_NUMBER(#{reserve_End})+1 and TO_NUMBER(#{reserve_End})-1 )
+		<if test="reNo != null and reNo != ''">
+			<![CDATA[AND reNo<> #{reNO}]]>
+		</if>
+	</select>
+	
+	<select id="getMrReserveByTime" parameterType="MrReserveVO" resultType="MrReserveVO">
+		Select * from mr_Reservation
+		Where	mrNo = #{mrNo} and reserve_Day = #{reserve_Day}
+		And		TO_NUMBER(#{reserve_Start}) >= TO_NUMBER(#{reserve_Start}) and TO_NUMBER(#{reserve_End}) >= TO_NUMBER(#{reserve_Start}) 
+	</select>
+
+</mapper>
