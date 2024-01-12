@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
@@ -89,6 +90,41 @@ public class MtRoomController {
 			model.addAttribute("msgCode", "등록실패! 확인 후 다시 시도해 주세요.");
 			return "mtRoomRegist";
 		}
+	}
+	
+	@RequestMapping(value="/mtRoomDetail", method = RequestMethod.POST)
+	public String getMtRoomView(@RequestParam("mrNo")int mrNo, Model model) throws Exception {
+		
+		MtRoomVO mtRoomVO = mtRoomService.getMtRoom(mrNo);
+		
+		model.addAttribute("mtRoomVO", mtRoomVO);
+		
+		return "mtRoomDetail";
+	}
+	
+	@RequestMapping(value="/deleteMtRoom", method= RequestMethod.GET)
+	public String deleteMtRoom(@RequestParam("mrNo")int mrNo, Model model) throws Exception{
+		
+		if(this.mtRoomService.deleteMtRoom(mrNo)!=0) {
+			model.addAttribute("errCode", 3);	//삭제 성공
+			return "redirect:mtRoomList";
+		}else {
+			model.addAttribute("errCode", 5);	//삭제 실패
+			return "redirect:getMtRoomManage";
+		}
+	}
+	
+	@RequestMapping(value="/updateMtRoom", method= RequestMethod.GET)
+	public String getMtRoomUpView(@RequestParam("mrNo")int mrNo, Model model) throws Exception{
+		
+		MtRoomVO mtRoomVO = mtRoomService.getMtRoom(mrNo);
+		
+		System.out.println("No=" + mtRoomVO.getMrNo());
+		System.out.println("Pic=" + mtRoomVO.getPicture());
+		
+		model.addAttribute("mtRoomVO",mtRoomVO);
+		
+		return "mtRoomUpdate";
 	}
 	
 }
