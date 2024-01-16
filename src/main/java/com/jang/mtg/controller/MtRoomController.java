@@ -127,4 +127,57 @@ public class MtRoomController {
 		return "mtRoomUpdate";
 	}
 	
+	@RequestMapping(value = "/updateMtRoom", method = RequestMethod.POST)
+	public String updateMtRoomOn(@ModelAttribute("mtRoomVO") MtRoomVO mtRoomVO, Model model, HttpSession session, MultipartHttpServletRequest mRequest) {
+		
+		String userId = (String)session.getAttribute("userId");
+		
+		ServletContext servletContext = mRequest.getSession().getServletContext();
+		String webappRoot = servletContext.getRealPath("/");
+		
+		String relativeFolder = File.separator + "resources" + File.separator + "images" + File.separator;
+		
+		mtRoomVO.setFirst_Reg_ID(userId);
+		
+		List<MultipartFile> fileList = mRequest.getFiles("file_1");
+		
+		for(MultipartFile mf : fileList) {
+			if(!mf.isEmpty()) {
+				//새 파일과 구 파일이 있으면 구 파일 삭제
+				if(!(mtRoomVO.getPicture().equals(null))) {
+					String safeFile = webappRoot + relativeFolder + mtRoomVO.getPicture();
+					File removeFile = new File(safeFile); //remove disk uploaded file
+					removeFile.delete();
+				}
+				
+				String originFileName = mf.getOriginalFilename(); //원본파일명
+				long fileSize = mf.getSize(); //파일 사이즈
+				
+				mtRoomVO.setPicture(originFileName);
+				
+				//하드디스크에 새 파일 저장
+				String safeFile = webappRoot + relativeFolder + originFileName;
+				
+				try {
+					mf.transferTo(new File(safeFile));
+				}catch(IllegalStateException e) {
+					e.printStackTrace();
+				}catch(IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		
+		if(this.mtRoomService.updateMtRoom(mtRoomVO) != 0 ) {
+			model.addAttribute("mtRoomVo", mtRoomVO);
+			model.addAttribute("errCode", 3);	//수정 성공
+			return "redirect:mtRoomList";
+		}else {
+			model.addAttribute("errCode", 5);	//수정 실패
+			return "redirect:mtRoomUpdate";
+		}
+		
+	}
+	
+	
 }
