@@ -9,14 +9,13 @@ public class MrReserveVO {
 	private String title;
 	private String reserve_Day;
 	private String reserve_Start;
-	private String private_End;
+	private String reserve_End;
 	private int attendees;
 	private String contents;
 	private String first_Reg_ID;
 	private String first_Reg_Date;
 	private String last_Upd_ID;
 	private String last_Upd_Date;
-	
 	public int getReNo() {
 		return reNo;
 	}
@@ -53,11 +52,11 @@ public class MrReserveVO {
 	public void setReserve_Start(String reserve_Start) {
 		this.reserve_Start = reserve_Start;
 	}
-	public String getPrivate_End() {
-		return private_End;
+	public String getReserve_End() {
+		return reserve_End;
 	}
-	public void setPrivate_End(String private_End) {
-		this.private_End = private_End;
+	public void setReserve_End(String reserve_End) {
+		this.reserve_End = reserve_End;
 	}
 	public int getAttendees() {
 		return attendees;
@@ -95,5 +94,7 @@ public class MrReserveVO {
 	public void setLast_Upd_Date(String last_Upd_Date) {
 		this.last_Upd_Date = last_Upd_Date;
 	}
+	
+	
 	
 }

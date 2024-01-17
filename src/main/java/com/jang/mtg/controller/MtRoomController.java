@@ -2,6 +2,10 @@ package com.jang.mtg.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Method;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletContext;
@@ -17,6 +21,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.jang.mtg.model.MrResTimeVO;
+import com.jang.mtg.model.MrReserveVO;
 import com.jang.mtg.model.MtRoomVO;
 import com.jang.mtg.service.MtRoomService;
 
@@ -180,4 +186,65 @@ public class MtRoomController {
 	}
 	
 	
+	@RequestMapping(value = "mtResList")
+	public String mrReserveList(@ModelAttribute("reserve_Day") String reserve_Day, Model model) throws Exception{
+		
+		String strSearchDay = "";
+		
+		LocalDate now = LocalDate.now();	//날짜 포맷 정의
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+		strSearchDay = now.format(formatter);
+		
+		if(reserve_Day.isEmpty()) {	//날짜가 입력되지 않았을 때 현재 날짜
+			reserve_Day = strSearchDay;
+		}
+		
+		List<MtRoomVO> mtRoomList = mtRoomService.getMtRoomList();	//회의실 정보를 모두 Read
+		
+		List<MrResTimeVO> mrResTimeList = new ArrayList<MrResTimeVO>();	//특정 날짜의 회의실 마다 예약 Read
+		
+		for(MtRoomVO mtRoom : mtRoomList) {	//회의실마다 예약시간 DTO(VO) 생성
+			
+			MrResTimeVO mrResTimeVO1 = new MrResTimeVO();
+			
+			mrResTimeVO1.setReserve_Day(reserve_Day);
+			mrResTimeVO1.setMrNo(mtRoom.getMrNo());
+			mrResTimeVO1.setMr_Name(mtRoom.getMr_Name());
+			
+			List<MrReserveVO> mrDayReserveList = mtRoomService.getMrReserveList(mrResTimeVO1);	//예약 테이블에서 특정일 회의실 여러개의 예약 Read
+			
+			for(MrReserveVO mrDayReserve : mrDayReserveList) {
+				
+				String sst = mrDayReserve.getReserve_Start().replace(":", "");	//09:30
+				String set = mrDayReserve.getReserve_End().replace(":", "");	//12:00
+				
+				int st = Integer.parseInt(sst);	//0930
+				int et = Integer.parseInt(set);	//1200
+				
+				int num;
+				
+				for(int i = st; i <= et; i+=50) {
+					
+					if(i%100>30) num = i-20;
+					else num = i;
+					
+					if(num%100==60) num += 40;
+					
+					String resveTn="setResveTemp"+num;
+					
+					//특정 객체의 클래스 이름을 읽어와 변수에 있는 메소드 이름으로 호출
+					Object obj = mrResTimeVO1;	//cls.newInstance();
+					Class<?> cls = Class.forName(obj.getClass().getName());
+					Method m = cls.getMethod(resveTn, String.class);
+					
+					m.invoke(obj, "1");	//메소드 호출("1" : 매개변수 : 파라미터)
+				}
+			}
+			mrResTimeList.add(mrResTimeVO1);
+		}
+		model.addAttribute("mrResTimeList", mrResTimeList);
+		model.addAttribute("reserve_Day", reserve_Day);
+		
+		return "mtResList";
+	}
 }

@@ -6,34 +6,33 @@ public class MrResTimeVO {	// 날짜별, 회의실별, 시간별 예약 표시�
 	private String mr_Name;
 	private String reserve_Day;
 	
-	private String reserveTemp800="0";
-	private String reserveTemp830="0";
-	private String reserveTemp900="0";
-	private String reserveTemp930="0";
-	private String reserveTemp1000="0";
-	private String reserveTemp1030="0";
-	private String reserveTemp1100="0";
-	private String reserveTemp1130="0";
-	private String reserveTemp1200="0";
-	private String reserveTemp1230="0";
-	private String reserveTemp1300="0";
-	private String reserveTemp1330="0";
-	private String reserveTemp1400="0";
-	private String reserveTemp1430="0";
-	private String reserveTemp1500="0";
-	private String reserveTemp1530="0";
-	private String reserveTemp1600="0";
-	private String reserveTemp1630="0";
-	private String reserveTemp1700="0";
-	private String reserveTemp1730="0";
-	private String reserveTemp1800="0";
-	private String reserveTemp1830="0";
-	private String reserveTemp1900="0";
-	private String reserveTemp1930="0";
-	private String reserveTemp2000="0";
-	private String reserveTemp2030="0";
-	private String reserveTemp2100="0";
-	
+	private String resveTemp800="0";
+	private String resveTemp830="0";
+	private String resveTemp900="0";
+	private String resveTemp930="0";
+	private String resveTemp1000="0";
+	private String resveTemp1030="0";
+	private String resveTemp1100="0";
+	private String resveTemp1130="0";
+	private String resveTemp1200="0";
+	private String resveTemp1230="0";
+	private String resveTemp1300="0";
+	private String resveTemp1330="0";
+	private String resveTemp1400="0";
+	private String resveTemp1430="0";
+	private String resveTemp1500="0";
+	private String resveTemp1530="0";
+	private String resveTemp1600="0";
+	private String resveTemp1630="0";
+	private String resveTemp1700="0";
+	private String resveTemp1730="0";
+	private String resveTemp1800="0";
+	private String resveTemp1830="0";
+	private String resveTemp1900="0";
+	private String resveTemp1930="0";
+	private String resveTemp2000="0";
+	private String resveTemp2030="0";
+	private String resveTemp2100="0";
 	public int getMrNo() {
 		return mrNo;
 	}
@@ -52,167 +51,168 @@ public class MrResTimeVO {	// 날짜별, 회의실별, 시간별 예약 표시�
 	public void setReserve_Day(String reserve_Day) {
 		this.reserve_Day = reserve_Day;
 	}
-	public String getReserveTemp800() {
-		return reserveTemp800;
+	public String getResveTemp800() {
+		return resveTemp800;
 	}
-	public void setReserveTemp800(String reserveTemp800) {
-		this.reserveTemp800 = reserveTemp800;
+	public void setResveTemp800(String resveTemp800) {
+		this.resveTemp800 = resveTemp800;
 	}
-	public String getReserveTemp830() {
-		return reserveTemp830;
+	public String getResveTemp830() {
+		return resveTemp830;
 	}
-	public void setReserveTemp830(String reserveTemp830) {
-		this.reserveTemp830 = reserveTemp830;
+	public void setResveTemp830(String resveTemp830) {
+		this.resveTemp830 = resveTemp830;
 	}
-	public String getReserveTemp900() {
-		return reserveTemp900;
+	public String getResveTemp900() {
+		return resveTemp900;
 	}
-	public void setReserveTemp900(String reserveTemp900) {
-		this.reserveTemp900 = reserveTemp900;
+	public void setResveTemp900(String resveTemp900) {
+		this.resveTemp900 = resveTemp900;
 	}
-	public String getReserveTemp930() {
-		return reserveTemp930;
+	public String getResveTemp930() {
+		return resveTemp930;
 	}
-	public void setReserveTemp930(String reserveTemp930) {
-		this.reserveTemp930 = reserveTemp930;
+	public void setResveTemp930(String resveTemp930) {
+		this.resveTemp930 = resveTemp930;
 	}
-	public String getReserveTemp1000() {
-		return reserveTemp1000;
+	public String getResveTemp1000() {
+		return resveTemp1000;
 	}
-	public void setReserveTemp1000(String reserveTemp1000) {
-		this.reserveTemp1000 = reserveTemp1000;
+	public void setResveTemp1000(String resveTemp1000) {
+		this.resveTemp1000 = resveTemp1000;
 	}
-	public String getReserveTemp1030() {
-		return reserveTemp1030;
+	public String getResveTemp1030() {
+		return resveTemp1030;
 	}
-	public void setReserveTemp1030(String reserveTemp1030) {
-		this.reserveTemp1030 = reserveTemp1030;
+	public void setResveTemp1030(String resveTemp1030) {
+		this.resveTemp1030 = resveTemp1030;
 	}
-	public String getReserveTemp1100() {
-		return reserveTemp1100;
+	public String getResveTemp1100() {
+		return resveTemp1100;
 	}
-	public void setReserveTemp1100(String reserveTemp1100) {
-		this.reserveTemp1100 = reserveTemp1100;
+	public void setResveTemp1100(String resveTemp1100) {
+		this.resveTemp1100 = resveTemp1100;
 	}
-	public String getReserveTemp1130() {
-		return reserveTemp1130;
+	public String getResveTemp1130() {
+		return resveTemp1130;
 	}
-	public void setReserveTemp1130(String reserveTemp1130) {
-		this.reserveTemp1130 = reserveTemp1130;
+	public void setResveTemp1130(String resveTemp1130) {
+		this.resveTemp1130 = resveTemp1130;
 	}
-	public String getReserveTemp1200() {
-		return reserveTemp1200;
+	public String getResveTemp1200() {
+		return resveTemp1200;
 	}
-	public void setReserveTemp1200(String reserveTemp1200) {
-		this.reserveTemp1200 = reserveTemp1200;
+	public void setResveTemp1200(String resveTemp1200) {
+		this.resveTemp1200 = resveTemp1200;
 	}
-	public String getReserveTemp1230() {
-		return reserveTemp1230;
+	public String getResveTemp1230() {
+		return resveTemp1230;
 	}
-	public void setReserveTemp1230(String reserveTemp1230) {
-		this.reserveTemp1230 = reserveTemp1230;
+	public void setResveTemp1230(String resveTemp1230) {
+		this.resveTemp1230 = resveTemp1230;
 	}
-	public String getReserveTemp1300() {
-		return reserveTemp1300;
+	public String getResveTemp1300() {
+		return resveTemp1300;
 	}
-	public void setReserveTemp1300(String reserveTemp1300) {
-		this.reserveTemp1300 = reserveTemp1300;
+	public void setResveTemp1300(String resveTemp1300) {
+		this.resveTemp1300 = resveTemp1300;
 	}
-	public String getReserveTemp1330() {
-		return reserveTemp1330;
+	public String getResveTemp1330() {
+		return resveTemp1330;
 	}
-	public void setReserveTemp1330(String reserveTemp1330) {
-		this.reserveTemp1330 = reserveTemp1330;
+	public void setResveTemp1330(String resveTemp1330) {
+		this.resveTemp1330 = resveTemp1330;
 	}
-	public String getReserveTemp1400() {
-		return reserveTemp1400;
+	public String getResveTemp1400() {
+		return resveTemp1400;
 	}
-	public void setReserveTemp1400(String reserveTemp1400) {
-		this.reserveTemp1400 = reserveTemp1400;
+	public void setResveTemp1400(String resveTemp1400) {
+		this.resveTemp1400 = resveTemp1400;
 	}
-	public String getReserveTemp1430() {
-		return reserveTemp1430;
+	public String getResveTemp1430() {
+		return resveTemp1430;
 	}
-	public void setReserveTemp1430(String reserveTemp1430) {
-		this.reserveTemp1430 = reserveTemp1430;
+	public void setResveTemp1430(String resveTemp1430) {
+		this.resveTemp1430 = resveTemp1430;
 	}
-	public String getReserveTemp1500() {
-		return reserveTemp1500;
+	public String getResveTemp1500() {
+		return resveTemp1500;
 	}
-	public void setReserveTemp1500(String reserveTemp1500) {
-		this.reserveTemp1500 = reserveTemp1500;
+	public void setResveTemp1500(String resveTemp1500) {
+		this.resveTemp1500 = resveTemp1500;
 	}
-	public String getReserveTemp1530() {
-		return reserveTemp1530;
+	public String getResveTemp1530() {
+		return resveTemp1530;
 	}
-	public void setReserveTemp1530(String reserveTemp1530) {
-		this.reserveTemp1530 = reserveTemp1530;
+	public void setResveTemp1530(String resveTemp1530) {
+		this.resveTemp1530 = resveTemp1530;
 	}
-	public String getReserveTemp1600() {
-		return reserveTemp1600;
+	public String getResveTemp1600() {
+		return resveTemp1600;
 	}
-	public void setReserveTemp1600(String reserveTemp1600) {
-		this.reserveTemp1600 = reserveTemp1600;
+	public void setResveTemp1600(String resveTemp1600) {
+		this.resveTemp1600 = resveTemp1600;
 	}
-	public String getReserveTemp1630() {
-		return reserveTemp1630;
+	public String getResveTemp1630() {
+		return resveTemp1630;
 	}
-	public void setReserveTemp1630(String reserveTemp1630) {
-		this.reserveTemp1630 = reserveTemp1630;
+	public void setResveTemp1630(String resveTemp1630) {
+		this.resveTemp1630 = resveTemp1630;
 	}
-	public String getReserveTemp1700() {
-		return reserveTemp1700;
+	public String getResveTemp1700() {
+		return resveTemp1700;
 	}
-	public void setReserveTemp1700(String reserveTemp1700) {
-		this.reserveTemp1700 = reserveTemp1700;
+	public void setResveTemp1700(String resveTemp1700) {
+		this.resveTemp1700 = resveTemp1700;
 	}
-	public String getReserveTemp1730() {
-		return reserveTemp1730;
+	public String getResveTemp1730() {
+		return resveTemp1730;
 	}
-	public void setReserveTemp1730(String reserveTemp1730) {
-		this.reserveTemp1730 = reserveTemp1730;
+	public void setResveTemp1730(String resveTemp1730) {
+		this.resveTemp1730 = resveTemp1730;
 	}
-	public String getReserveTemp1800() {
-		return reserveTemp1800;
+	public String getResveTemp1800() {
+		return resveTemp1800;
 	}
-	public void setReserveTemp1800(String reserveTemp1800) {
-		this.reserveTemp1800 = reserveTemp1800;
+	public void setResveTemp1800(String resveTemp1800) {
+		this.resveTemp1800 = resveTemp1800;
 	}
-	public String getReserveTemp1830() {
-		return reserveTemp1830;
+	public String getResveTemp1830() {
+		return resveTemp1830;
 	}
-	public void setReserveTemp1830(String reserveTemp1830) {
-		this.reserveTemp1830 = reserveTemp1830;
+	public void setResveTemp1830(String resveTemp1830) {
+		this.resveTemp1830 = resveTemp1830;
 	}
-	public String getReserveTemp1900() {
-		return reserveTemp1900;
+	public String getResveTemp1900() {
+		return resveTemp1900;
 	}
-	public void setReserveTemp1900(String reserveTemp1900) {
-		this.reserveTemp1900 = reserveTemp1900;
+	public void setResveTemp1900(String resveTemp1900) {
+		this.resveTemp1900 = resveTemp1900;
 	}
-	public String getReserveTemp1930() {
-		return reserveTemp1930;
+	public String getResveTemp1930() {
+		return resveTemp1930;
 	}
-	public void setReserveTemp1930(String reserveTemp1930) {
-		this.reserveTemp1930 = reserveTemp1930;
+	public void setResveTemp1930(String resveTemp1930) {
+		this.resveTemp1930 = resveTemp1930;
 	}
-	public String getReserveTemp2000() {
-		return reserveTemp2000;
+	public String getResveTemp2000() {
+		return resveTemp2000;
 	}
-	public void setReserveTemp2000(String reserveTemp2000) {
-		this.reserveTemp2000 = reserveTemp2000;
+	public void setResveTemp2000(String resveTemp2000) {
+		this.resveTemp2000 = resveTemp2000;
 	}
-	public String getReserveTemp2030() {
-		return reserveTemp2030;
+	public String getResveTemp2030() {
+		return resveTemp2030;
 	}
-	public void setReserveTemp2030(String reserveTemp2030) {
-		this.reserveTemp2030 = reserveTemp2030;
+	public void setResveTemp2030(String resveTemp2030) {
+		this.resveTemp2030 = resveTemp2030;
 	}
-	public String getReserveTemp2100() {
-		return reserveTemp2100;
+	public String getResveTemp2100() {
+		return resveTemp2100;
 	}
-	public void setReserveTemp2100(String reserveTemp2100) {
-		this.reserveTemp2100 = reserveTemp2100;
+	public void setResveTemp2100(String resveTemp2100) {
+		this.resveTemp2100 = resveTemp2100;
 	}
+	
 
 }
