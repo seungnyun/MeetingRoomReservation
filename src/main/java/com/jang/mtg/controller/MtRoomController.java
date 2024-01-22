@@ -11,6 +11,7 @@ import java.util.List;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
 
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,9 +19,12 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.fasterxml.jackson.databind.util.JSONPObject;
 import com.jang.mtg.model.MrResTimeVO;
 import com.jang.mtg.model.MrReserveVO;
 import com.jang.mtg.model.MtRoomVO;
@@ -247,4 +251,78 @@ public class MtRoomController {
 		
 		return "mtResList";
 	}
+	
+	@RequestMapping(value = "/mtResRegist", method = RequestMethod.POST)
+	public String insertResVeiw(@ModelAttribute("mrReserveVO") MrReserveVO mrReserveVO, Model model, HttpSession session) throws Exception{
+		
+		System.out.println("mrReserveVo No=" + mrReserveVO.getMrNo());
+		System.out.println("mrReserveVo Day=" + mrReserveVO.getReserve_Day());
+		System.out.println("mrReserveVo Start=" + mrReserveVO.getReserve_Start());
+		
+		int intValue1 = Integer.parseInt(mrReserveVO.getReserve_Start())+100;
+		String endTime = Integer.toString(intValue1);
+		mrReserveVO.setReserve_End(endTime);
+		
+		session.setAttribute("userId", "Test20"); //login 개발 완료 후 삭제
+		String userId = (String) session.getAttribute("userId");
+		mrReserveVO.setBookerID(userId);
+		
+		MtRoomVO mtRoomVO = mtRoomService.getMtRoom(mrReserveVO.getMrNo());
+		
+		System.out.println("mtRoomVO Name=" + mtRoomVO.getMr_Name());
+		System.out.println("mtRoomVO Location=" + mtRoomVO.getLocation());
+		System.out.println("mtRoomVO mrNo=" + mtRoomVO.getMrNo());
+		
+		model.addAttribute("mtRoomVO",mtRoomVO);
+		model.addAttribute("mrReserveVO",mrReserveVO);
+		
+		return "mtResRegist";
+	}
+	
+	@RequestMapping(value = "resDupCheck") @ResponseBody
+	public String mtgResDupCheck(@ModelAttribute("mrReserveVO") MrReserveVO mrReserveVO,
+								 @RequestParam("reserve_Day") String reserve_Day,
+								 @RequestParam("reserve_Start") String reserve_Start,
+								 @RequestParam("reserve_End") String reserve_End,
+								 @RequestParam("mrNo") String mrNo,
+								 Model model) throws Exception{
+		System.out.println("mrReserveVO reserve_Day=" + mrReserveVO.getReserve_Day());
+		System.out.println("mrReserveVO mrNo=" + mrReserveVO.getMrNo());
+		System.out.println("mrReserveVO st=" + mrReserveVO.getReserve_Start());
+		System.out.println("mrReserveVO et=" + mrReserveVO.getReserve_End());
+		
+		JSONObject obj = new JSONObject();
+		
+		int dupCheck = this.mtRoomService.resDupCheck(mrReserveVO);
+		
+		if(dupCheck != 0) {
+			obj.append("dup","false");
+			return obj.toString();
+		}else {
+			obj.append("dup", "true");
+			return obj.toString();
+		}
+		
+	}
+	
+	@RequestMapping(value = "/insertReserve", method = RequestMethod.POST)
+	public String insertResOn(@ModelAttribute("mrReserveVO") MrReserveVO mrReserveVO, Model model, HttpSession session, RedirectAttributes rea)throws Exception {
+		
+		String userId = (String)session.getAttribute("userId");
+		
+		mrReserveVO.setFirst_Reg_ID(userId);
+		mrReserveVO.setBookerID(userId);
+		
+		System.out.println(mrReserveVO);
+		
+		if(this.mtRoomService.insertMrReserve(mrReserveVO)!=0) {
+			rea.addFlashAttribute("reserve_Day",mrReserveVO.getReserve_Day());
+			return "redirect:mtResList";
+		}else {
+			model.addAttribute("errCode","5");
+			return "mtResRegist";
+		}
+		
+	}
+	
 }

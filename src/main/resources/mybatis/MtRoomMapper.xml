@@ -52,14 +52,16 @@
 		Where reNo=#{reNO}
 	</delete>
 	
-	<select id="restDupCheck" parameterType="MrReserveVO" resultType="int">
-		Select count(*) from mr_Reservation
-		Where reserve_Day = #{reserve_Day}
-		And mrNo = #{mrNO}
-		And (TO_NUMBER(reserve_Start) BETWEEN TO_NUMBER(#{reserve_Start})+1 and TO_NUMBER(#{reserve_End})-1
-			or TO_NUMBER(reserve_End) BETWEEN TO_NUMBER(#{reserve_End})+1 and TO_NUMBER(#{reserve_End})-1 )
+	<select id="resDupCheck" parameterType="MrReserveVO" resultType="int">
+		SELECT COUNT(*) FROM mr_Reservation
+        WHERE reserve_Day = #{reserve_Day}
+        AND mrNo = #{mrNo}
+        AND (
+            CAST(reserve_Start AS UNSIGNED) BETWEEN CAST(#{reserve_Start} AS UNSIGNED) + 1 AND CAST(#{reserve_End} AS UNSIGNED) - 1
+            OR CAST(reserve_End AS UNSIGNED) BETWEEN CAST(#{reserve_Start} AS UNSIGNED) + 1 AND CAST(#{reserve_End} AS UNSIGNED) - 1
+        )
 		<if test="reNo != null and reNo != ''">
-			<![CDATA[AND reNo<> #{reNO}]]>
+			<![CDATA[AND reNo<> #{reNo}]]>
 		</if>
 	</select>
 	
